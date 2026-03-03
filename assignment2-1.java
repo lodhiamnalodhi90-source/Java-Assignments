@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class TwoDArrays {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter no. of rows: ");
+        int rows = sc.nextInt(); 
+        
+        System.out.print("Enter no. of columns: ");
+        int colm = sc.nextInt(); 
+
+        int[][] matrix = new int[rows][colm];
+
+        System.out.println("Enter matrix elements (row by row):");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colm; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println();
+
+        for (int i = 0; i < rows; i++) {
+            long sum = 0;
+            for (int j = 0; j < colm; j++) {
+                sum += matrix[i][j]; 
+            }
+            System.out.println("Sum of row " + i + " = " + sum);
+        }
+
+        System.out.println();
+
+        for (int j = 0; j < colm; j++) {
+            long sum = 0;
+            for (int i = 0; i < rows; i++) {
+                sum += matrix[i][j];
+            }
+            System.out.println("Sum of colm " + j + " = " + sum);
+        }
+
+        System.out.println();
+
+        int sumL = 0, sumR = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colm; j++) {
+                if (i == j) {
+                    sumL += matrix[i][j]; 
+                }
+                if ((i + j) == (rows - 1)) { 
+                    sumR += matrix[i][j];
+                }
+            }
+        }
+        System.out.println("Sum of left diagonal = " + sumL);
+        System.out.println("Sum of right diagonal = " + sumR);
+        
+        sc.close();
+    }
+}
