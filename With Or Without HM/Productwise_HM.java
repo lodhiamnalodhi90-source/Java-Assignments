@@ -7,7 +7,7 @@ public class Productwise_HM {
 
     public static void main(String[] args) {
 
-        File f1 = new File("W:\\Amna\\SalesEVESession.txt");
+        File f1 = new File("enter file path here");
         Scanner inp;
         String dl;
         HashMap<String,Double> hm = new HashMap<>();
