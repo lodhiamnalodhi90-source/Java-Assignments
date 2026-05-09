@@ -1,0 +1,97 @@
+import java.util.Scanner;
+
+public class MagicSquare {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter no. of rows: ");
+        int rows = sc.nextInt();
+        
+        System.out.print("Enter no. of columns: ");
+        int colm = sc.nextInt();
+
+        // 1. A Magic Square MUST be a square matrix (rows == cols)
+        if (rows != colm) {
+            System.out.println("A magic square must have the same number of rows and columns.");
+            return; // Exit the program early
+        }
+
+        int[][] matrix = new int[rows][colm];
+        System.out.println("Enter matrix elements row by row:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < colm; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+
+        // Calculate the sum of the FIRST ROW to use as our "target sum"
+        int targetSum = 0;
+        for (int j = 0; j < colm; j++) {
+            targetSum += matrix[0][j];
+        }
+
+        boolean isMagicSquare = true;
+
+        // 2. Check sums of all rows
+        for (int i = 0; i < rows; i++) {
+            int rowSum = 0;
+            for (int j = 0; j < colm; j++) {
+                rowSum += matrix[i][j];
+            }
+            System.out.println("Sum of row " + (i+1) + " = " + rowSum);
+            if (rowSum != targetSum) {
+                isMagicSquare = false;
+            }
+        }
+
+        // 3. Check sums of all columns
+        for (int j = 0; j < colm; j++) {
+            int colSum = 0;
+            for (int i = 0; i < rows; i++) {
+                colSum += matrix[i][j];
+            }
+            System.out.println("Sum of column " + (j+1) + " = " + colSum);
+            if (colSum != targetSum) {
+                isMagicSquare = false;
+            }
+        }
+
+        // 4. Check sum of Left Diagonal (where row index == col index)
+        int sumLd = 0;
+        for (int i = 0; i < rows; i++) {
+            sumLd += matrix[i][i]; // You don't need a nested loop for this!
+        }
+        System.out.println("Sum of left diagonal = " + sumLd);
+        if (sumLd != targetSum) {
+            isMagicSquare = false;
+        }
+
+        // 5. Check sum of Right Diagonal
+        int sumRd = 0;
+        for (int i = 0; i < rows; i++) {
+            sumRd += matrix[i][rows - 1 - i]; // Efficient way to find right diagonal
+        }
+        System.out.println("Sum of right diagonal = " + sumRd);
+        if (sumRd != targetSum) {
+            isMagicSquare = false;
+        }
+
+        // 6. Final check and output
+        if (isMagicSquare) {
+            System.out.println("\nYes! The entered matrix is a Magic Square.");
+            // Your assignment requested printing the matrix if it is a magic square
+            System.out.println("The Matrix is:");
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < colm; j++) {
+                    System.out.print(matrix[i][j] + "\t"); // \t adds a tab space for neatness
+                }
+                System.out.println(); // move to next line after printing a row
+            }
+        } else {
+            System.out.println("\nNo, the entered matrix is NOT a magic square.");
+        }
+        
+        sc.close();
+    }
+}
